@@ -1,0 +1,4 @@
+.RecipeTable td, .RecipeTable th {
+  vertical-align: middle;
+  text-align: center;
+}

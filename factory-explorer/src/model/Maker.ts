@@ -12,6 +12,7 @@ export default class Maker implements IForge {
     public efficiency:number;
     public instances:number;
     public basePower:number;
+    public readonly tags: string[];
 
     private _inputs: Port[];
     private _outputs: Port[];
@@ -93,6 +94,7 @@ export default class Maker implements IForge {
             efficiency: this.efficiency,
             instances: this.instances,
             recipeName: this.recipeName,
+            tags: this.tags.map(tag => tag),
         }
     }
 
@@ -105,6 +107,7 @@ export default class Maker implements IForge {
             simpleMaker.efficiency,
             simpleMaker.inputs,
             simpleMaker.outputs,
+            simpleMaker.tags,
         );
     }
 
@@ -122,6 +125,7 @@ export default class Maker implements IForge {
         efficiency: number = 1,
         inputs : SimplePort[] = [],
         outputs: SimplePort[] = [],
+        tags: string[] = []
         ) {
 
         this.buildingName = buildingName;
@@ -130,6 +134,8 @@ export default class Maker implements IForge {
 
         this.efficiency = efficiency;
         this.instances = instances;
+
+        this.tags = tags.map(tag => tag); // copy array
 
         this._inputs = [];
         this._outputs = [];

@@ -3,6 +3,7 @@ import Port from './Port';
 import Maker from './Maker';
 
 import ForgeList from './ForgeList';
+import { SimpleMaker } from '../data/simpleTypes';
 
 
 /**
@@ -15,12 +16,16 @@ export default class Factory implements IForge {
 
     private _makers : ForgeList<Maker>;
 
+    public get entries() : Maker[] {
+        return this._makers.entries;
+    }
+
     public get power() : number {
         return this._makers.power;
     }
 
     public get totalDemand() {
-        return this._makers.totalDemand ;
+        return this._makers.totalDemand;
     }
 
     public get totalSupply() {
@@ -43,10 +48,27 @@ export default class Factory implements IForge {
         this._makers.condense();
     }
 
+    public add(maker: SimpleMaker | Maker) {
+        let template: SimpleMaker;
+
+        if(maker instanceof Maker) {
+            const m: Maker = maker;
+            template = m.simplify();
+        } else {
+            template = maker;
+        }
+
+        const newMaker = Maker.fromSimpleMaker(template);
+        this._makers.entries.push(newMaker);
+
+        return this;
+    }
+
     constructor(name: string, instances: number = 1) {
         this.name = name;
         this.instances = instances;
 
         this._makers = new ForgeList(`${this.name} -> Makers`);
     }
+
 }

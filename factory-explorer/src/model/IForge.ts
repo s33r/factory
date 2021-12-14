@@ -6,9 +6,12 @@ import Port from './Port';
 export default interface IForge {
     get inputs(): ReadonlyArray<Port>;
     get outputs(): ReadonlyArray<Port>;
+
     get power(): number;
+    get basePower(): number;
 
     get name(): string;
+    get buildingName(): string;
 
     get totalDemand(): number;
     get totalSupply(): number;
@@ -18,6 +21,10 @@ export default interface IForge {
 
     get instances(): number;
     set instances(value: number);
+
+    get tags() : string[];
+
+    getOutputByItem(item: string): Port | null;
 
     condense() : void;
 }

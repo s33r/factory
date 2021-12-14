@@ -2,24 +2,36 @@ import React from 'react';
 import './RecipeTable.css';
 
 import Table from 'react-bootstrap/Table';
+import Badge from 'react-bootstrap/Badge';
 import Maker from '../../../model/Maker';
+import IForge from '../../../model/IForge';
 
 const h = React.createElement;
 
 type RecipeTableProps = {
-  forge: Maker[],
+  forge: IForge[],
 }
 
 function createCell(content: string, rowSpan: number = 1, colSpan: number = 1) {
-  return h('td', {
-    rowSpan,
-    colSpan,
-  }, content);
+  return(<td colSpan={colSpan} rowSpan={rowSpan}>{content}</td>);
 }
 
-function renderEntry(index: number, entry: Maker) {
+function createTagsCell(tags: string[], rowSpan: number = 1, colSpan: number = 1) {
+  return (
+    <td colSpan={colSpan} rowSpan={rowSpan}>
+      <ul className="list-unstyled">
+      {tags.map((tag, index) =>
+        <li key={index}><Badge  bg="primary">{tag}</Badge></li>
+      )}
+    </ul>
 
-   const body : React.ReactElement[][] = [];
+    </td>
+  );
+}
+
+function renderEntry(index: number, entry: IForge) {
+
+  const body : React.ReactElement[][] = [];
 
   const inputRows = entry.inputs.length;
   const outputRows = entry.outputs.length;
@@ -28,7 +40,8 @@ function renderEntry(index: number, entry: Maker) {
 
   const mainRow: React.ReactElement[] = [];
 
-  mainRow.push(createCell(entry.recipeName, 0));
+//  mainRow.push(createCell(entry.recipeName, 0));
+  mainRow.push(createTagsCell(entry.tags, 0));
   mainRow.push(createCell(entry.buildingName, 0));
   mainRow.push(createCell(entry.instances.toString(), 0));
   mainRow.push(createCell(entry.efficiency.toString(), 0));
@@ -64,8 +77,10 @@ function renderEntry(index: number, entry: Maker) {
   }
 
 
-  const tableRows = body.reduce((list, current) => {
-     list.push(h('tr', null, current));
+  const tableRows = body.reduce((list, current, index) => {
+     list.push(h('tr', {
+       key: index
+     }, current));
 
      return list;
     }, []);
@@ -78,10 +93,10 @@ function renderEntry(index: number, entry: Maker) {
 function RecipeTable(props: RecipeTableProps) {
 
   return (
-    <Table className='RecipeTable' striped bordered hover size="sm" variant="dark">
+    <Table className='RecipeTable' bordered size="sm" variant="dark">
       <thead>
         <tr>
-          <th>Recipe</th>
+        <th>Tags</th>
           <th>Building</th>
           <th>Instances</th>
           <th>Efficiency</th>
@@ -96,6 +111,8 @@ function RecipeTable(props: RecipeTableProps) {
           <th>Total Input</th>
           <th>Instance Input</th>
           <th>Input Item</th>
+
+
         </tr>
       </thead>
 

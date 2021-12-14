@@ -8,8 +8,6 @@ const enum NodeQuality {
 
 export default NodeQuality;
 
-
-
 export const getTag = function getTag(quality: NodeQuality) {
     switch(quality) {
         case NodeQuality.Impure:  return KnownTags.Impure;

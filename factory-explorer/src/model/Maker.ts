@@ -85,6 +85,16 @@ export default class Maker implements IForge {
         this._outputs = Maker.condensePorts(this._outputs);
     }
 
+    public getOutputByItem(item: string) {
+        const results = this.outputs.filter(output => output.itemName === item);
+
+        if(results.length > 0){
+            return results[0];
+        } else {
+            return null;
+        }
+    }
+
     public simplify() : SimpleMaker {
         return {
             inputs: this.inputs.map(port => port.simplify()),

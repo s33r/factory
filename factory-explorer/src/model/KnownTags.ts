@@ -8,6 +8,7 @@ enum KnownTags {
     Generator = 'generator',
     Extractor = 'extractor',
     Ficsmas = 'ficsmas',
+    Preferred = 'preferred',
 };
 
 export default KnownTags;

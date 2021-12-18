@@ -1,4 +1,3 @@
-import Factory from '../model/Factory';
 import IForge from '../model/IForge';
 import ForgeNode from './ForgeNode';
 
@@ -6,15 +5,12 @@ import ForgeNode from './ForgeNode';
 
 
 
-export const simpleOptimizer = function(factory: Factory) {
-    const target = new ForgeNode(factory);
+export const simpleOptimizer = function(forges: IForge[]): IForge[] {
+    const results: IForge[] = [];
 
-    target.forge.inputs.forEach(input => console.log(input));
-
-    target.simpleBuild();
-    const results = target.flatten();
-
-    console.log(results);
+    forges.map(forge => new ForgeNode(forge))
+        .map(node => node.simpleBuild())
+        .forEach(node => node.flatten(results));
 
     return results;
 }

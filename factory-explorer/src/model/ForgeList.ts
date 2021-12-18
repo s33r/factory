@@ -37,6 +37,10 @@ export default class ForgeList implements IForge {
         return this.name;
     }
 
+    public get sortCode() {
+        return this.name;
+    }
+
     public get inputs() : ReadonlyArray<Port> {
         const ports: PortMap = {};
 
@@ -106,6 +110,10 @@ export default class ForgeList implements IForge {
         } else {
             return null;
         }
+    }
+
+    public sort() {
+        this.entries.sort((alpha, beta) => alpha.sortCode.localeCompare(beta.sortCode));
     }
 
     constructor(name: string, instances: number = 1,tags: string[] = []) {

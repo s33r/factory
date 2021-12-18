@@ -5,34 +5,36 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 import RecipeTable from '../RecipeTable/RecipeTable';
+import SupplyTableView from '../SupplyTableView/SupplyTableView';
 
 import { recipeLibrary } from '../../../data';
 import Factory from '../../../model/Factory';
-import { simpleOptimizer } from '../../../optimizer';
 
-const factory : Factory = new Factory('My Factory');
-
-// factory.add(recipeLibrary.getExtractor('Iron Ore', ExtractorLevel.Mark2, NodeQuality.Pure));
-// factory.add(recipeLibrary.getByName('Iron Ingot'));
-factory.add(recipeLibrary.getByName('Computer'));
-
-const optimizedList = simpleOptimizer(factory);
+const allRecipes  = new Factory('All Recipes');
+recipeLibrary.getAll().forEach(r => allRecipes.add(r));
 
 
-function FactoryView() {
+type FactoryViewProps = {
+  factory: Factory
+}
+
+
+// factory.optimize();
+
+function FactoryView(props: FactoryViewProps) {
   return (
     <div>
-      <h2>Factory: {factory.name}</h2>
+      <h2>Factory: {props.factory.name}</h2>
 
       <Tabs defaultActiveKey="factory-view" id="main-tabs" className="mb-3">
         <Tab eventKey="factory-view" title="Buildings">
-          <RecipeTable forge={optimizedList}></RecipeTable>
+          <RecipeTable factory={props.factory}></RecipeTable>
         </Tab>
         <Tab eventKey="io-view" title="I/O">
-          <p>Show Factory I/O List</p>
+          <SupplyTableView factory={props.factory}/>
         </Tab>
         <Tab eventKey="all-view" title="All Recipes">
-        <p>Show All Recipes</p>
+        <RecipeTable factory={allRecipes}></RecipeTable>
         </Tab>
       </Tabs>
     </div>

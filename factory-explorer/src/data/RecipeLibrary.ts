@@ -91,6 +91,10 @@ export default class RecipeLibrary {
             .filter(r => r.tags.includes(getTag(quality)))[0];
     }
 
+    public getAll() : SimpleMaker[] {
+        return Array.from(this._recipesByName.values());
+    }
+
 
 
     constructor() {

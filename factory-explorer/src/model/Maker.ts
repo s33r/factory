@@ -2,6 +2,7 @@
 import Port from './Port';
 import { SimpleMaker, SimplePort } from '../data/simpleTypes';
 import IForge from './IForge';
+import KnownTags from './KnownTags';
 
 /**
  * Represents a forge that typically has at least one input and one output
@@ -120,6 +121,21 @@ export default class Maker implements IForge {
             simpleMaker.tags,
         );
     }
+
+    public get sortCode() {
+        let sortCode = '';
+
+        sortCode += this.tags.includes(KnownTags.Extractor) ? 'z' : '';
+        sortCode += this.tags.includes(KnownTags.Pure) ? 'a' : '';
+        sortCode += this.tags.includes(KnownTags.Pure) ? 'b' : '';
+        sortCode += this.tags.includes(KnownTags.Pure) ? 'c' : '';
+
+        sortCode += this.tags.includes(KnownTags.Pure) ? 'y' : '';
+        sortCode += `${this.inputs.length}-${this.name.toLowerCase()}`;
+
+        return sortCode;
+    }
+
 
     /**
      *

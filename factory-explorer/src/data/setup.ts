@@ -55,6 +55,21 @@ const manufacturer : SimpleMaker[] = [
     {
         ...forge,
         ...buildings.manufacturer,
+        recipeName: 'Beacon',
+        inputs: [
+            { item: 'Iron Plate', rate: 22.5},
+            { item: 'Iron Rod',   rate: 7.5},
+            { item: 'Wire',       rate: 112.5},
+            { item: 'Cable',      rate: 15},
+        ],
+        outputs: [
+            {item: 'Beacon', rate: 7.5}
+        ],
+        tags:[],
+    },
+    {
+        ...forge,
+        ...buildings.manufacturer,
         recipeName: 'Modular Engine',
         inputs: [
             { item: 'Motor', rate: 2},
@@ -360,7 +375,7 @@ const result: SimpleMaker[] = [
     single(buildings.xconstructor, 'Iron Plate',                'Iron Ingot',             30,   'Iron Plate',                20),
     single(buildings.xconstructor, 'Iron Rod',                  'Iron Ingot',             15,   'Iron Rod',                  15),
     single(buildings.xconstructor, 'Screw',                     'Iron Rod',               10,   'Screw',                     40),
-    single(buildings.xconstructor, 'Alternate: Cast Screw',     'Iron Ingot',             12.5, 'Screw',                     50),
+    single(buildings.xconstructor, 'Alternate: Cast Screw',     'Iron Ingot',             12.5, 'Screw',                     50, [KnownTags.Preferred]),
     single(buildings.xconstructor, 'Copper Sheet',              'Copper Ingot',           20,   'Copper Sheet',              10),
     single(buildings.xconstructor, 'Steel Beam',                'Steel Ingot',            60,   'Steel Beam',                15),
     single(buildings.xconstructor, 'Steel Pipe',                'Steel Ingot',            30,   'Steel Pipe',                20),
@@ -379,11 +394,11 @@ const result: SimpleMaker[] = [
     single(buildings.xconstructor, 'Alternate: Charcoal',       'Wood',                   15,   'Coal',                     150),
     single(buildings.xconstructor, 'Spiked Rebar',              'Iron Rod',               15,   'Spiked Rebar',              15),
     single(buildings.xconstructor, 'Color Cartridge',           'Flower Petals',          37.5, 'Color Cartridge',           75),
-    single(buildings.xconstructor, 'Candy Cane',                'FICSMAS Gift',           15,   'Candy Cane',                 5),
-    single(buildings.xconstructor, 'Actual Snow',               'FICSMAS Gift',           25,   'Actual Snow',               10),
-    single(buildings.xconstructor, 'FICSMAS Tree Branch',       'FICSMAS Gift',           10,   'FICSMAS Tree Branch',       10),
-    single(buildings.xconstructor, 'FICSMAS Bow',               'FICSMAS Gift',           10,   'FICSMAS Bow',                5),
-    single(buildings.xconstructor, 'Snowball',                  'Actual Snow',            15,   'Snowball',                   5),
+    single(buildings.xconstructor, 'Candy Cane',                'FICSMAS Gift',           15,   'Candy Cane',                 5, [KnownTags.Ficsmas]),
+    single(buildings.xconstructor, 'Actual Snow',               'FICSMAS Gift',           25,   'Actual Snow',               10, [KnownTags.Ficsmas]),
+    single(buildings.xconstructor, 'FICSMAS Tree Branch',       'FICSMAS Gift',           10,   'FICSMAS Tree Branch',       10, [KnownTags.Ficsmas]),
+    single(buildings.xconstructor, 'FICSMAS Bow',               'FICSMAS Gift',           10,   'FICSMAS Bow',                5, [KnownTags.Ficsmas]),
+    single(buildings.xconstructor, 'Snowball',                  'Actual Snow',            15,   'Snowball',                   5, [KnownTags.Ficsmas]),
     single(buildings.smelter,      'Iron Ingot',                'Iron Ore',               30,   'Iron Ingot',                30),
     single(buildings.smelter,      'Copper Ingot',              'Copper Ore',             30,   'Copper Ingot',              30),
     single(buildings.smelter,      'Caterium Ingot',            'Caterium Ore',           45,   'Caterium Ingot',            15),

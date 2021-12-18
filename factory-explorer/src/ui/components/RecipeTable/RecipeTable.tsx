@@ -3,13 +3,13 @@ import './RecipeTable.css';
 
 import Table from 'react-bootstrap/Table';
 import Badge from 'react-bootstrap/Badge';
-import Maker from '../../../model/Maker';
 import IForge from '../../../model/IForge';
+import Factory from '../../../model/Factory';
 
 const h = React.createElement;
 
 type RecipeTableProps = {
-  forge: IForge[],
+  factory: Factory
 }
 
 function createCell(content: string, rowSpan: number = 1, colSpan: number = 1) {
@@ -29,7 +29,7 @@ function createTagsCell(tags: string[], rowSpan: number = 1, colSpan: number = 1
   );
 }
 
-function renderEntry(index: number, entry: IForge) {
+function renderEntry(index: number, entry: IForge, factory: Factory) {
 
   const body : React.ReactElement[][] = [];
 
@@ -85,9 +85,15 @@ function renderEntry(index: number, entry: IForge) {
      return list;
     }, []);
 
-  const tableBody = h('tbody', {key: index}, tableRows);
 
-  return tableBody;
+    let className = '';
+    if(factory.getTotalCompleted(entry.name) >= entry.instances) {
+      className = 'complete';
+    }
+
+    const tableBody = h('tbody', {key: index, className }, tableRows);
+
+    return tableBody;
 }
 
 function RecipeTable(props: RecipeTableProps) {
@@ -116,7 +122,7 @@ function RecipeTable(props: RecipeTableProps) {
         </tr>
       </thead>
 
-      {props.forge.map((maker, index) => renderEntry(index, maker))}
+      {props.factory.entries.map((maker, index) => renderEntry(index, maker, props.factory))}
 
     </Table>
   );

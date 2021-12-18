@@ -23,6 +23,7 @@ export default interface IForge {
     set instances(value: number);
 
     get tags() : string[];
+    get sortCode(): string;
 
     getOutputByItem(item: string): Port | null;
 

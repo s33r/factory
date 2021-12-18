@@ -11,10 +11,19 @@ export default class ForgeNode {
     public readonly forge: IForge;
 
 
-    private static getMaker(port: Port) : Maker | null {
-        const results: SimpleMaker[] = recipeLibrary
+    private static getMaker(port: Port, includeExtractors: boolean = true, includeGenerators: boolean = true) : Maker | null {
+        let results: SimpleMaker[] = recipeLibrary
             .getByOutput(port.itemName)
-            .filter(template => !template.tags.includes(KnownTags.Finite));
+            .filter(template => !template.tags.includes(KnownTags.Finite))
+            .sort((a, b) => a.tags.includes(KnownTags.Preferred) ? -1 : 0);
+
+        if(!includeExtractors) {
+            results = results.filter(template => !template.tags.includes(KnownTags.Extractor))
+        }
+
+        if(!includeGenerators) {
+            results = results.filter(template => !template.tags.includes(KnownTags.Generator))
+        }
 
         if(results.length > 0){
             return Maker.fromSimpleMaker(results[0]);
@@ -23,9 +32,9 @@ export default class ForgeNode {
         }
     }
 
-    public simpleBuild(buffer: number = 0) {
+    public simpleBuild(includeExtractors: boolean = true, includeGenerators: boolean = true) {
         this.forge.inputs
-        .map(input => ForgeNode.getMaker(input))
+        .map(input => ForgeNode.getMaker(input, includeExtractors, includeGenerators))
         .filter(entry => !!entry)
         .forEach(entry => this.children.push(new ForgeNode(entry!)));
 
@@ -34,11 +43,11 @@ export default class ForgeNode {
 
             if(output) {
                 const multiplier = targetInput.rate / output!.forge.getOutputByItem(targetInput.itemName)!.baseRate;
-                output.forge.instances = Math.ceil(multiplier) + buffer;
+                output.forge.instances = Math.ceil(multiplier);
             }
         });
 
-        this.children.forEach(child => child.simpleBuild(buffer));
+
 
         return this;
     }
@@ -51,7 +60,6 @@ export default class ForgeNode {
 
         return list;
     }
-
 
     constructor(forge: IForge, children: ForgeNode[] = []) {
         this.forge = forge;

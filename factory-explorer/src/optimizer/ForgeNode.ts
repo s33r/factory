@@ -18,11 +18,11 @@ export default class ForgeNode {
             .sort((a, b) => a.tags.includes(KnownTags.Preferred) ? -1 : 0);
 
         if(!includeExtractors) {
-            results = results.filter(template => !template.tags.includes(KnownTags.Extractor))
+            results = results.filter(template => !template.tags.includes(KnownTags.Extractor));
         }
 
         if(!includeGenerators) {
-            results = results.filter(template => !template.tags.includes(KnownTags.Generator))
+            results = results.filter(template => !template.tags.includes(KnownTags.Generator));
         }
 
         if(results.length > 0){
@@ -46,8 +46,6 @@ export default class ForgeNode {
                 output.forge.instances = Math.ceil(multiplier);
             }
         });
-
-
 
         return this;
     }

@@ -68,7 +68,7 @@ export default class Factory implements IForge {
         return this;
     }
 
-    public add(maker: SimpleMaker | Maker, instances: number = 1) {
+    public add(maker: SimpleMaker | Maker, instances: number = 1, efficiency: number = 1) {
         let template: SimpleMaker;
 
         if(maker instanceof Maker) {
@@ -80,6 +80,7 @@ export default class Factory implements IForge {
 
         const newMaker = Maker.fromSimpleMaker(template);
         newMaker.instances = instances;
+        newMaker.efficiency = efficiency;
 
         this._list.entries.push(newMaker);
 

@@ -188,6 +188,45 @@ const refinery: SimpleMaker[] = [
         ],
         tags:[],
     },
+    {
+        ...forge,
+        ...buildings.refinery,
+        recipeName: 'Liquid Biofuel',
+        inputs: [
+            { item: 'Solid Biofuel', rate: 90},
+            { item: 'Water', rate: 45},
+        ],
+        outputs: [
+            { item: 'Liquid Biofuel', rate: 60},
+        ],
+        tags:[KnownTags.Finite],
+    },
+    {
+        ...forge,
+        ...buildings.refinery,
+        recipeName: 'Alternate: Pure Quartz Crystal',
+        inputs: [
+            { item: 'Raw Quartz', rate: 67.5},
+            { item: 'Water', rate: 37.5},
+        ],
+        outputs: [
+            { item: 'Raw Quartz', rate: 52.5},
+        ],
+        tags:[],
+    },
+    {
+        ...forge,
+        ...buildings.refinery,
+        recipeName: 'Alternate: Polyester Fabric',
+        inputs: [
+            { item: 'Polymer Resin', rate: 80},
+            { item: 'Water', rate: 50},
+        ],
+        outputs: [
+            { item: 'Fabric', rate: 5},
+        ],
+        tags:[],
+    },
 
 ];
 
@@ -296,12 +335,24 @@ function double(
 
 
 
+function calculateMinerRate(level: ExtractorLevel, quality: NodeQuality) {
+    const levelRate = 2**level;
+    const qualityRate = 2**quality;
+    const baseRate = 30;
 
+    const rate = levelRate * qualityRate * baseRate;
+
+
+
+    return rate;
+
+}
 
 function miners(item: string): SimpleMaker[] {
     function miner(item: string, level: ExtractorLevel, quality: NodeQuality) : SimpleMaker {
         const tag = getTag(quality);
-        const rate = ((2**level) * ((2**quality) * 30));
+        // const rate = ((2**level) * ((2**quality) * 30));
+        const rate = calculateMinerRate(level, quality);
         const building = getBuilding(level);
 
         const result = {
@@ -343,6 +394,8 @@ const result: SimpleMaker[] = [
     ...miners('Caterium Ore'),
     ...miners('Sulfur'),
     ...miners('Coal'),
+    ...miners('Limestone'),
+    ...miners('Raw Quartz'),
 
     {
         ...forge,
@@ -372,58 +425,62 @@ const result: SimpleMaker[] = [
 
     },
 
-    single(buildings.xconstructor, 'Iron Plate',                'Iron Ingot',             30,   'Iron Plate',                20),
-    single(buildings.xconstructor, 'Iron Rod',                  'Iron Ingot',             15,   'Iron Rod',                  15),
-    single(buildings.xconstructor, 'Screw',                     'Iron Rod',               10,   'Screw',                     40),
-    single(buildings.xconstructor, 'Alternate: Cast Screw',     'Iron Ingot',             12.5, 'Screw',                     50, [KnownTags.Preferred]),
-    single(buildings.xconstructor, 'Copper Sheet',              'Copper Ingot',           20,   'Copper Sheet',              10),
-    single(buildings.xconstructor, 'Steel Beam',                'Steel Ingot',            60,   'Steel Beam',                15),
-    single(buildings.xconstructor, 'Steel Pipe',                'Steel Ingot',            30,   'Steel Pipe',                20),
-    single(buildings.xconstructor, 'Wire',                      'Copper Ingot',           15,   'Wire',                      30),
-    single(buildings.xconstructor, 'Cable',                     'Wire',                   60,   'Cable',                     30),
-    single(buildings.xconstructor, 'Quickwire',                 'Caterium Ingot',         12,   'Quickwire',                 60),
-    single(buildings.xconstructor, 'Concrete',                  'Limestone',              45,   'Concrete',                  15),
-    single(buildings.xconstructor, 'Quartz Crystal',            'Raw Quartz',             37.5, 'Quartz Crystal',            22.5),
-    single(buildings.xconstructor, 'Silica',                    'Raw Quartz',             22.5, 'Silica',                    37.5),
-    single(buildings.xconstructor, 'Biomass (Leaves)',          'Leaves',                120,   'Biomass',                   60, [KnownTags.Finite]),
-    single(buildings.xconstructor, 'Biomass (Wood)',            'Wood',                   60,   'Biomass',                  300, [KnownTags.Finite]),
-    single(buildings.xconstructor, 'Biomass (Alien Carapace)',  'Alien Carapace',         15,   'Biomass',                 1500, [KnownTags.Finite]),
-    single(buildings.xconstructor, 'Biomass (Alien Organs)',    'Alien Organs',            7.5, 'Biomass',                 1500, [KnownTags.Finite]),
-    single(buildings.xconstructor, 'Solid Biofueel',            'Biomass',               120,   'Solid Biomass',             60),
-    single(buildings.xconstructor, 'Alternate: Biocoal',        'Biomass',                37.5, 'Coal',                      45),
-    single(buildings.xconstructor, 'Alternate: Charcoal',       'Wood',                   15,   'Coal',                     150),
-    single(buildings.xconstructor, 'Spiked Rebar',              'Iron Rod',               15,   'Spiked Rebar',              15),
-    single(buildings.xconstructor, 'Color Cartridge',           'Flower Petals',          37.5, 'Color Cartridge',           75),
-    single(buildings.xconstructor, 'Candy Cane',                'FICSMAS Gift',           15,   'Candy Cane',                 5, [KnownTags.Ficsmas]),
-    single(buildings.xconstructor, 'Actual Snow',               'FICSMAS Gift',           25,   'Actual Snow',               10, [KnownTags.Ficsmas]),
-    single(buildings.xconstructor, 'FICSMAS Tree Branch',       'FICSMAS Gift',           10,   'FICSMAS Tree Branch',       10, [KnownTags.Ficsmas]),
-    single(buildings.xconstructor, 'FICSMAS Bow',               'FICSMAS Gift',           10,   'FICSMAS Bow',                5, [KnownTags.Ficsmas]),
-    single(buildings.xconstructor, 'Snowball',                  'Actual Snow',            15,   'Snowball',                   5, [KnownTags.Ficsmas]),
-    single(buildings.smelter,      'Iron Ingot',                'Iron Ore',               30,   'Iron Ingot',                30),
-    single(buildings.smelter,      'Copper Ingot',              'Copper Ore',             30,   'Copper Ingot',              30),
-    single(buildings.smelter,      'Caterium Ingot',            'Caterium Ore',           45,   'Caterium Ingot',            15),
-    single(buildings.smelter,      'Blue FICSMAS Ornament',     'FICSMAS Gift',            5,   'Blue FICSMAS Ornament',     10, [KnownTags.Ficsmas]),
-    single(buildings.smelter,      'Red FICSMAS Ornament',      'FICSMAS Gift',            5,   'Red FICSMAS Ornament',       5, [KnownTags.Ficsmas]),
-    double(buildings.foundry,      'Steel Ingot',               'Iron Ore',               45,   'Coal', 45, 'Steel Ingot',   45),
-    double(buildings.foundry,      'Copper FICSMAS Ornament',   'Red FICSMAS Ornament',   10,   'Copper Ingot',               10,   'Copper FICSMAS Ornament',   5, [KnownTags.Ficsmas]),
-    double(buildings.foundry,      'Iron FICSMAS Ornament',     'Blue FICSMAS Ornament',  15,   'Iron Ingot',                 15,   'Iron FICSMAS Ornament',     5, [KnownTags.Ficsmas]),
-    double(buildings.assembler,    'Reinforced Iron Plate',     'Iron Plate',             30,   'Screw',                      60,   'Reinforced Iron Plate',     5),
-    double(buildings.assembler,    'Modular Frame',             'Reinforced Iron Plate',   3,   'Iron Rod',                   12,   'Modular Frame',             2),
-    double(buildings.assembler,    'Encased Industrial Beam',   'Steel Beam',             24,   'Concrete',                   30,   'Encased Industrial Beam',   6),
-    double(buildings.assembler,    'Rotor',                     'Iron Rod',               20,   'Screw',                     100,   'Rotor',                     4),
-    double(buildings.assembler,    'Stator',                    'Steel Pipe',             15,   'Wire',                       40,   'Stator',                    5),
-    double(buildings.assembler,    'Motor',                     'Rotor',                  10,   'Stator',                     10,   'Motor',                     5),
-    double(buildings.assembler,    'Smart Plating',             'Reinforced Iron Plate',   2,   'Rotor',                       2,   'Smart Plating',             2),
-    double(buildings.assembler,    'Versatile Framework',       'Modular Frame',           2.5, 'Steel Beam',                 30,   'Versatile Framework',       5),
-    double(buildings.assembler,    'Automated Wiring',          'Stator',                  2.5, 'Cable',                      50,   'Automated Wiring',          2.5),
-    double(buildings.assembler,    'Alternate: Compacted Coal', 'Coal',                   25,   'Sulfur',                     25,   'Compacted Coal',           25),
-    double(buildings.assembler,    'AI Limiter',                'Copper Sheet',           25,   'Quickwire',                 100,   'AI Limiter',                5),
-    double(buildings.assembler,    'Black Powder',              'Coal',                    7.5, 'Sulfur',                     15,   'Black Powder',              7.5),
-    double(buildings.assembler,    'Nobelisk',                  'Black Powder',           15,   'Steel Pipe',                 30,   'Nobelisk',                  3),
-    double(buildings.assembler,    'Circuit Board',             'Copper Sheet',           15,   'Plastic',                    30,   'Circuit Board',             7.5),
-    double(buildings.assembler,    'FICSMAS Ornament Bundle',   'Copper FICSMAS Ornament', 5,   'Iron FICSMAS Ornament',       5,   'FICSMAS Ornament Bundle',   5, [KnownTags.Ficsmas]),
-    double(buildings.assembler,    'FICSMAS Decoration',        'FICSMAS Tree Branch',    15,   'FICSMAS Ornament Bundle',     6,   'FICSMAS Decoration',        2, [KnownTags.Ficsmas]),
-    double(buildings.assembler,    'FICSMAS Wonder Star',       'FICSMAS Decoration',      2.5, 'Candy Cane',                 25,   'FICSMAS Wonder Star',        .5, [KnownTags.Ficsmas]),
+    single(buildings.xconstructor, 'Iron Plate',                         'Iron Ingot',              30,    'Iron Plate',              20),
+    single(buildings.xconstructor, 'Iron Rod',                           'Iron Ingot',              15,    'Iron Rod',                15),
+    single(buildings.xconstructor, 'Screw',                              'Iron Rod',                10,    'Screw',                   40),
+    single(buildings.xconstructor, 'Alternate: Cast Screw',              'Iron Ingot',              12.5,  'Screw',                   50, [KnownTags.Preferred]),
+    single(buildings.xconstructor, 'Copper Sheet',                       'Copper Ingot',            20,    'Copper Sheet',            10),
+    single(buildings.xconstructor, 'Steel Beam',                         'Steel Ingot',             60,    'Steel Beam',              15),
+    single(buildings.xconstructor, 'Steel Pipe',                         'Steel Ingot',             30,    'Steel Pipe',              20),
+    single(buildings.xconstructor, 'Wire',                               'Copper Ingot',            15,    'Wire',                    30),
+    single(buildings.xconstructor, 'Cable',                              'Wire',                    60,    'Cable',                   30),
+    single(buildings.xconstructor, 'Quickwire',                          'Caterium Ingot',          12,    'Quickwire',               60),
+    single(buildings.xconstructor, 'Concrete',                           'Limestone',               45,    'Concrete',                15),
+    single(buildings.xconstructor, 'Quartz Crystal',                     'Raw Quartz',              37.5,  'Quartz Crystal',          22.5),
+    single(buildings.xconstructor, 'Silica',                             'Raw Quartz',              22.5,  'Silica',                  37.5),
+    single(buildings.xconstructor, 'Biomass (Leaves)',                   'Leaves',                  120,   'Biomass',                 60,  [KnownTags.Finite]),
+    single(buildings.xconstructor, 'Biomass (Wood)',                     'Wood',                    60,    'Biomass',                 300, [KnownTags.Finite]),
+    single(buildings.xconstructor, 'Biomass (Alien Carapace)',           'Alien Carapace',          15,    'Biomass',                 1500, [KnownTags.Finite]),
+    single(buildings.xconstructor, 'Biomass (Alien Organs)',             'Alien Organs',            7.5,   'Biomass',                 1500, [KnownTags.Finite]),
+    single(buildings.xconstructor, 'Solid Biofuel',                     'Biomass',                 120,   'Solid Biomass',           60),
+    single(buildings.xconstructor, 'Alternate: Biocoal',                 'Biomass',                 37.5,  'Coal',                    45),
+    single(buildings.xconstructor, 'Alternate: Charcoal',                'Wood',                    15,    'Coal',                    150),
+    single(buildings.xconstructor, 'Spiked Rebar',                       'Iron Rod',                15,    'Spiked Rebar',            15),
+    single(buildings.xconstructor, 'Color Cartridge',                    'Flower Petals',           37.5,  'Color Cartridge',         75, [KnownTags.Finite]),
+    single(buildings.xconstructor, 'Candy Cane',                         'FICSMAS Gift',            15,    'Candy Cane',              5,  [KnownTags.Ficsmas]),
+    single(buildings.xconstructor, 'Actual Snow',                        'FICSMAS Gift',            25,    'Actual Snow',             10, [KnownTags.Ficsmas]),
+    single(buildings.xconstructor, 'FICSMAS Tree Branch',                'FICSMAS Gift',            10,    'FICSMAS Tree Branch',     10, [KnownTags.Ficsmas]),
+    single(buildings.xconstructor, 'FICSMAS Bow',                        'FICSMAS Gift',            10,    'FICSMAS Bow',             5,  [KnownTags.Ficsmas]),
+    single(buildings.xconstructor, 'Snowball',                           'Actual Snow',             15,    'Snowball',                5,  [KnownTags.Ficsmas]),
+    single(buildings.smelter,      'Iron Ingot',                         'Iron Ore',                30,    'Iron Ingot',              30),
+    single(buildings.smelter,      'Copper Ingot',                       'Copper Ore',              30,    'Copper Ingot',            30),
+    single(buildings.smelter,      'Caterium Ingot',                     'Caterium Ore',            45,    'Caterium Ingot',          15),
+    single(buildings.smelter,      'Blue FICSMAS Ornament',              'FICSMAS Gift',            5,     'Blue FICSMAS Ornament',   10,  [KnownTags.Ficsmas]),
+    single(buildings.smelter,      'Red FICSMAS Ornament',               'FICSMAS Gift',            5,     'Red FICSMAS Ornament',    5,                                    [KnownTags.Ficsmas]),
+    double(buildings.foundry,      'Steel Ingot',                        'Iron Ore',                45,    'Coal',                    45,    'Steel Ingot',             45),
+    double(buildings.foundry,      'Copper FICSMAS Ornament',            'Red FICSMAS Ornament',    10,    'Copper Ingot',            10,    'Copper FICSMAS Ornament', 5,   [KnownTags.Ficsmas]),
+    double(buildings.foundry,      'Iron FICSMAS Ornament',              'Blue FICSMAS Ornament',   15,    'Iron Ingot',              15,    'Iron FICSMAS Ornament',   5,   [KnownTags.Ficsmas]),
+    double(buildings.assembler,    'Reinforced Iron Plate',              'Iron Plate',              30,    'Screw',                   60,    'Reinforced Iron Plate',   5),
+    double(buildings.assembler,    'Alternate: Adhered Iron Plate',      'Iron Plate',              11.25, 'Rubber',                  3.75,  'Reinforced Iron Plate',   5),
+    double(buildings.assembler,    'Modular Frame',                      'Reinforced Iron Plate',   3,     'Iron Rod',                12,    'Modular Frame',           2),
+    double(buildings.assembler,    'Encased Industrial Beam',            'Steel Beam',              24,    'Concrete',                30,    'Encased Industrial Beam', 6),
+    double(buildings.assembler,    'Alternate: Encased Industrial Pipe', 'Steel Pipe',              28,    'Concrete',                20,    'Encased Industrial Beam', 4, [KnownTags.Preferred]),
+    double(buildings.assembler,    'Rotor',                              'Iron Rod',                20,    'Screw',                   100,   'Rotor',                   4),
+    double(buildings.assembler,    'Stator',                             'Steel Pipe',              15,    'Wire',                    40,    'Stator',                  5),
+    double(buildings.assembler,    'Motor',                              'Rotor',                   10,    'Stator',                  10,    'Motor',                   5),
+    double(buildings.assembler,    'Smart Plating',                      'Reinforced Iron Plate',   2,     'Rotor',                   2,     'Smart Plating',           2),
+    double(buildings.assembler,    'Versatile Framework',                'Modular Frame',           2.5,   'Steel Beam',              30,    'Versatile Framework',     5),
+    double(buildings.assembler,    'Automated Wiring',                   'Stator',                  2.5,   'Cable',                   50,    'Automated Wiring',        2.5),
+    double(buildings.assembler,    'Alternate: Compacted Coal',          'Coal',                    25,    'Sulfur',                  25,    'Compacted Coal',          25),
+    double(buildings.assembler,    'AI Limiter',                         'Copper Sheet',            25,    'Quickwire',               100,   'AI Limiter',              5),
+    double(buildings.assembler,    'Black Powder',                       'Coal',                    7.5,   'Sulfur',                  15,    'Black Powder',            7.5),
+    double(buildings.assembler,    'Nobelisk',                           'Black Powder',            15,    'Steel Pipe',              30,    'Nobelisk',                3),
+    double(buildings.assembler,    'Circuit Board',                      'Copper Sheet',            15,    'Plastic',                 30,    'Circuit Board',           7.5),
+    double(buildings.assembler,    'Alternate: Crystal Computer',        'Circuit Board',           7.5,   'Crystal Oscillator',      2.813, 'Computer',                2.813),
+    double(buildings.assembler,    'Fabric',                             'Mycelia',                 15,    'Biomass',                 75,    'Fabric',                  15, [KnownTags.Finite]),
+    double(buildings.assembler,    'FICSMAS Ornament Bundle',            'Copper FICSMAS Ornament', 5,     'Iron FICSMAS Ornament',   5,     'FICSMAS Ornament Bundle', 5, [KnownTags.Ficsmas]),
+    double(buildings.assembler,    'FICSMAS Decoration',                 'FICSMAS Tree Branch',     15,    'FICSMAS Ornament Bundle', 6,     'FICSMAS Decoration',      2, [KnownTags.Ficsmas]),
+    double(buildings.assembler,    'FICSMAS Wonder Star',                'FICSMAS Decoration',      2.5,   'Candy Cane',              25,    'FICSMAS Wonder Star',     .5, [KnownTags.Ficsmas]),
 
 ];
 

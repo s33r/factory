@@ -26,6 +26,17 @@ function tier6() {
     return factory;
 }
 
+function testCable() {
+    const factory : Factory = new Factory('Test Cable');
+
+    factory.add(recipeLibrary.getByName('Cable'));
+
+    factory.optimize();
+    factory.sort();
+
+    return factory;
+}
+
 
 
 function createExtractors() {
@@ -53,9 +64,9 @@ function createExtractors() {
 }
 
 export default function createFactory() {
-    const factory = createExtractors();
+    const factory = testCable();
 
-    factory.complete('Concrete', 20);
+
 
 
     return factory;

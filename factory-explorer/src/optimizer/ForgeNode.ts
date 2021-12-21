@@ -34,9 +34,9 @@ export default class ForgeNode {
 
     public simpleBuild(includeExtractors: boolean = true, includeGenerators: boolean = true) {
         this.forge.inputs
-        .map(input => ForgeNode.getMaker(input, includeExtractors, includeGenerators))
-        .filter(entry => !!entry)
-        .forEach(entry => this.children.push(new ForgeNode(entry!)));
+            .map(input => ForgeNode.getMaker(input, includeExtractors, includeGenerators))
+            .filter(entry => !!entry)
+            .forEach(entry => this.children.push(new ForgeNode(entry!)));
 
         this.forge.inputs.forEach(targetInput => {
             const output = this.children.find(child => child.forge.getOutputByItem(targetInput.itemName));
@@ -44,6 +44,8 @@ export default class ForgeNode {
             if(output) {
                 const multiplier = targetInput.rate / output!.forge.getOutputByItem(targetInput.itemName)!.baseRate;
                 output.forge.instances = Math.ceil(multiplier);
+
+                output.simpleBuild(includeExtractors, includeGenerators);
             }
         });
 

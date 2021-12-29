@@ -9,7 +9,7 @@ export const simpleOptimizer = function(forges: IForge[]): IForge[] {
     const results: IForge[] = [];
 
     forges.map(forge => new ForgeNode(forge))
-        .map(node => node.simpleBuild(true, true))
+        .map(node => node.simpleBuild(false, false))
         .forEach(node => node.flatten(results));
 
     return results;

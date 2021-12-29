@@ -136,6 +136,10 @@ export default class Maker implements IForge {
         return sortCode;
     }
 
+    public toJson(): string {
+        return JSON.stringify(this.simplify(), null, '\t');
+    }
+
 
     /**
      *

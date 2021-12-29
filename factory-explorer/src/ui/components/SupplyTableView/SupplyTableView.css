@@ -1,0 +1,8 @@
+.bad-row td {
+    background-color: red !important;
+}
+
+.warn-row td {
+    background-color: yellow !important;
+    color: black;
+}

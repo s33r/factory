@@ -25,14 +25,14 @@ export type BaseMaker = {
 export type SimpleMaker = Building & BaseForge & BaseMaker;
 
 export const makerBuildings : {[key: string]: Building} = {
-    manufacturer: { buildingName: 'Manufacturer', basePower: -55},
-    xconstructor: { buildingName: 'Constructor', basePower: -4},
-    assembler: { buildingName: 'Assembler', basePower: -15},
-    foundry: { buildingName: 'Foundry', basePower: -16},
-    smelter: { buildingName: 'Smelter', basePower: -4},
-    refinery: {buildingName: 'Refinery', basePower: -30},
-    generatorCoal: {buildingName: 'Coal Generator', basePower: 75},
-    generatorFuel: {buildingName: 'Fuel Generator', basePower: 125},
+    manufacturer:  { buildingName: 'Manufacturer',   basePower: -55},
+    xconstructor:  { buildingName: 'Constructor',    basePower: -4},
+    assembler:     { buildingName: 'Assembler',      basePower: -15},
+    foundry:       { buildingName: 'Foundry',        basePower: -16},
+    smelter:       { buildingName: 'Smelter',        basePower: -4},
+    refinery:      { buildingName: 'Refinery',       basePower: -30},
+    generatorCoal: { buildingName: 'Coal Generator', basePower: 75},
+    generatorFuel: { buildingName: 'Fuel Generator', basePower: 125},
 
 
     minerMk1: {buildingName: 'Miner Mk.1', basePower: -5},
@@ -40,8 +40,8 @@ export const makerBuildings : {[key: string]: Building} = {
     minerMk3: {buildingName: 'Miner Mk.3', basePower: -30},
 
     waterExtractor: {buildingName: 'Water Extractor', basePower: -20},
-    oilExtractor: {buildingName: 'Oil Extractor', basePower: -40},
 
+    oilExtractor: {buildingName: 'Oil Extractor', basePower: -40},
 
     giftTree: {buildingName: 'FICSMAS Gift Tree', basePower: 0},
 

@@ -9,10 +9,34 @@ export default class RecipeLibrary {
     private _recipesByBuilding: Map<string, string[]>
     private _recipesByTags: Map<string, string[]>
 
-    public addRecipe(maker: SimpleMaker) : RecipeLibrary{
-        if(this._recipesByName.has(maker.recipeName)) {
-            throw new Error(`Cannot add duplicate recipe: ${maker.recipeName}`);
+
+
+    public tagTerminals() {
+
+
+
+    }
+
+    private validateSimpleMaker(simpleMaker: SimpleMaker | null) : Error | null {
+        if(!simpleMaker) {
+            return new Error('')
         }
+
+        if(this._recipesByName.has(simpleMaker.recipeName)) {
+            return new Error(`Cannot add duplicate recipe: ${simpleMaker.recipeName}`);
+        }
+
+        return null;
+    }
+
+    public addRecipe(maker: SimpleMaker) : RecipeLibrary {
+        const validationResult = this.validateSimpleMaker(maker);
+
+        if(validationResult) {
+            throw validationResult;
+        }
+
+
 
         const makerActual = Object.assign({}, maker);
 
@@ -95,7 +119,9 @@ export default class RecipeLibrary {
         return Array.from(this._recipesByName.values());
     }
 
-
+    public toJson() {
+        return JSON.stringify(this.getAll(), null, '\t');
+    }
 
     constructor() {
         this._recipesByName = new Map<string, SimpleMaker>();

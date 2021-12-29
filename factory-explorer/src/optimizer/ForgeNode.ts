@@ -33,6 +33,8 @@ export default class ForgeNode {
     }
 
     public simpleBuild(includeExtractors: boolean = true, includeGenerators: boolean = true) {
+        console.log(this.forge.name);
+
         this.forge.inputs
             .map(input => ForgeNode.getMaker(input, includeExtractors, includeGenerators))
             .filter(entry => !!entry)

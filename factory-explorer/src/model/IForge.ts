@@ -25,7 +25,8 @@ export default interface IForge {
     get tags() : string[];
     get sortCode(): string;
 
-    getOutputByItem(item: string): Port | null;
 
+
+    getOutputByItem(item: string): Port | null;
     condense() : void;
 }

@@ -8,10 +8,24 @@ type SupplyTableProps = {
   factory: Factory
 }
 
+
+function getRowClass(delta: number) {
+
+  if(delta === 0 ) {
+    return 'warn-row';
+  }
+
+  if(delta <0) {
+    return 'bad-row';
+  }
+
+  return ''
+}
+
 function SupplyTableView(props: SupplyTableProps) {
 
   return (
-    <Table className='SupplyTableView' bordered size="sm" variant="dark" striped>
+    <Table className='SupplyTableView' bordered size="sm" variant="dark">
       <thead>
         <tr>
           <th>Delta</th>
@@ -23,7 +37,7 @@ function SupplyTableView(props: SupplyTableProps) {
 
       <tbody>
       {props.factory.getSupplyTable().entries.map((entry,index) => (
-        <tr key={index}>
+        <tr key={index} className={getRowClass(entry.delta)}>
           <td>{entry.delta}</td>
           <td>{entry.itemName}</td>
           <td>{entry.supply}</td>

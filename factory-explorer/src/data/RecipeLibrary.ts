@@ -1,6 +1,7 @@
 import ExtractorLevel, { getBuilding } from "./ExtractorLevel";
 import NodeQuality, { getTag } from "./NodeQuality";
 import { SimpleMaker } from "./simpleTypes";
+import KnownTags from '../model/KnownTags';
 
 export default class RecipeLibrary {
     private _recipesByName: Map<string, SimpleMaker>;
@@ -8,27 +9,6 @@ export default class RecipeLibrary {
     private _recipesByOutputs: Map<string, string[]>
     private _recipesByBuilding: Map<string, string[]>
     private _recipesByTags: Map<string, string[]>
-
-    public tagTerminals() {
-        type ItemRecords = {[key: string]: boolean}
-
-        const foundOutputs: ItemRecords = {};
-        const foundInputs: ItemRecords = {};
-
-        this._recipesByName.forEach(recipe => {
-            recipe.inputs.forEach(input => foundInputs[input.item] = true);
-            recipe.outputs.forEach(input => foundOutputs[input.item] = true);
-        });
-
-        const inputTerminals: string[] = Object.keys(foundInputs).filter(key => !foundOutputs[key]);
-        const outputTerminals: string[] = Object.keys(foundOutputs).filter(key => !foundInputs[key]);
-
-        console.log('Output Terminals');
-        console.log(outputTerminals);
-        console.log('Input Terminals');
-        console.log(inputTerminals);
-
-    }
 
     private validateSimpleMaker(simpleMaker: SimpleMaker | null) : Error | null {
         if(!simpleMaker) {

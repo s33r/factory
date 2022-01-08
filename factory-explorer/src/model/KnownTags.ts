@@ -8,8 +8,8 @@ enum KnownTags {
     Extractor = 'extractor',    // Extracts resources from resource nodes
     Ficsmas = 'ficsmas',        // FICSMAS Recipe
     Preferred = 'preferred',    // Prioritize this recipe over others
-    Terminal = 'terminal',      // No other recipes consume the output from this recipe
-    Original = 'original',      // Has no inputs
+    Terminal = 'terminal',      // Recipe produces items that no other recipe consumes
+    Original = 'original',      // Recipe requires items that no other recipes produce
     Goal = 'goal'               // Space Elevator Goal Part
 
 };

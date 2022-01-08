@@ -9,11 +9,24 @@ export default class RecipeLibrary {
     private _recipesByBuilding: Map<string, string[]>
     private _recipesByTags: Map<string, string[]>
 
-
-
     public tagTerminals() {
+        type ItemRecords = {[key: string]: boolean}
 
+        const foundOutputs: ItemRecords = {};
+        const foundInputs: ItemRecords = {};
 
+        this._recipesByName.forEach(recipe => {
+            recipe.inputs.forEach(input => foundInputs[input.item] = true);
+            recipe.outputs.forEach(input => foundOutputs[input.item] = true);
+        });
+
+        const inputTerminals: string[] = Object.keys(foundInputs).filter(key => !foundOutputs[key]);
+        const outputTerminals: string[] = Object.keys(foundOutputs).filter(key => !foundInputs[key]);
+
+        console.log('Output Terminals');
+        console.log(outputTerminals);
+        console.log('Input Terminals');
+        console.log(inputTerminals);
 
     }
 

@@ -4,7 +4,7 @@ import NodeQuality from '../data/NodeQuality';
 
 import Factory from '../model/Factory';
 
-export default function createTier6(name: string = 'Tier6 Factory') {
+export default function createTier6(name: string = 'Phase 3 Factory') {
     const factory : Factory = new Factory(name);
 
 

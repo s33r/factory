@@ -10,6 +10,7 @@ enum KnownTags {
     Preferred = 'preferred',    // Prioritize this recipe over others
     Terminal = 'terminal',      // No other recipes consume the output from this recipe
     Original = 'original',      // Has no inputs
+    Goal = 'goal'               // Space Elevator Goal Part
 
 };
 

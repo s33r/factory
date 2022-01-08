@@ -25,14 +25,17 @@ export type BaseMaker = {
 export type SimpleMaker = Building & BaseForge & BaseMaker;
 
 export const makerBuildings : {[key: string]: Building} = {
-    manufacturer:  { buildingName: 'Manufacturer',   basePower: -55},
-    xconstructor:  { buildingName: 'Constructor',    basePower: -4},
-    assembler:     { buildingName: 'Assembler',      basePower: -15},
-    foundry:       { buildingName: 'Foundry',        basePower: -16},
-    smelter:       { buildingName: 'Smelter',        basePower: -4},
-    refinery:      { buildingName: 'Refinery',       basePower: -30},
-    generatorCoal: { buildingName: 'Coal Generator', basePower: 75},
-    generatorFuel: { buildingName: 'Fuel Generator', basePower: 125},
+    manufacturer:     { buildingName: 'Manufacturer',         basePower: -55},
+    xconstructor:     { buildingName: 'Constructor',          basePower: -4},
+    assembler:        { buildingName: 'Assembler',            basePower: -15},
+    foundry:          { buildingName: 'Foundry',              basePower: -16},
+    smelter:          { buildingName: 'Smelter',              basePower: -4},
+    refinery:         { buildingName: 'Refinery',             basePower: -30},
+    blender:          { buildingName: 'Blender',              basePower: -75},
+    accelerator:      { buildingName: 'Particle Accelerator', basePower: -1500},
+    generatorCoal:    { buildingName: 'Coal Generator',       basePower: 75},
+    generatorFuel:    { buildingName: 'Fuel Generator',       basePower: 125},
+    generatorNuclear: { buildingName: 'Nuclear Power Plant ', basePower: 2500},
 
 
     minerMk1: {buildingName: 'Miner Mk.1', basePower: -5},

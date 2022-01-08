@@ -39,7 +39,7 @@ export default function assembler() : SimpleMaker[] {
         i2o1(b, 'Alternate: Stitched Iron Plate',            'Iron Plate',                  10,    'Wire',                     20,    'Reinforced Iron Plate',       3),
         i2o1(b, 'AI Limiter',                                'Copper Sheet',                25,    'Quickwire',                100,   'AI Limiter',                  5),
         i2o1(b, 'Alclad Aluminum Sheet',                     'Aluminum Ingot',              30,    'Copper Ingot',             10,    'Alclad Aluminum Sheet',       30),
-        i2o1(b, 'Assembly Director System',                  'Adaptive Control Unit',       1.5,   'Supercomputer',            .75,   'Assembly Director System',    .8),
+        i2o1(b, 'Assembly Director System',                  'Adaptive Control Unit',       1.5,   'Supercomputer',            .75,   'Assembly Director System',    .8, [KnownTags.Goal]),
         i2o1(b, 'Automated Wiring',                          'Stator',                      2.5,   'Cable',                    50,    'Automated Wiring',            2.5),
         i2o1(b, 'Black Powder',                              'Coal',                        7.5,   'Sulfur',                   15,    'Black Powder',                7.5),
         i2o1(b, 'Circuit Board',                             'Copper Sheet',                15,    'Plastic',                  30,    'Circuit Board',               7.5),
@@ -58,9 +58,9 @@ export default function assembler() : SimpleMaker[] {
         i2o1(b, 'Reinforced Iron Plate',                     'Iron Plate',                  30,    'Screw',                    60,    'Reinforced Iron Plate',       5),
         i2o1(b, 'Rotor',                                     'Iron Rod',                    20,    'Screw',                    100,   'Rotor',                       4),
         i2o1(b, 'Stator',                                    'Steel Pipe',                  15,    'Wire',                     40,    'Stator',                      5),
-        i2o1(b, 'Smart Plating',                             'Reinforced Iron Plate',       2,     'Rotor',                    2,     'Smart Plating',               2),
+        i2o1(b, 'Smart Plating',                             'Reinforced Iron Plate',       2,     'Rotor',                    2,     'Smart Plating',               2, [KnownTags.Goal]),
         i2o1(b, 'Sparkly Fireworks',                         'FICSMAS Tree Branch',         7.5,  'Actual Snow',               5,     'Sparkly Fireworks',           2.5, [KnownTags.Ficsmas]),
         i2o1(b, 'Sweet Fireworks',                           'FICSMAS Tree Branch',         15,   'Candy Cane',                7.5,   'Sweet Fireworks',             2.5, [KnownTags.Ficsmas]),
-        i2o1(b, 'Versatile Framework',                       'Modular Frame',               2.5,   'Steel Beam',               30,    'Versatile Framework',         5),
+        i2o1(b, 'Versatile Framework',                       'Modular Frame',               2.5,   'Steel Beam',               30,    'Versatile Framework',         5, [KnownTags.Goal]),
     ];
 }

@@ -11,7 +11,10 @@ enum KnownTags {
     Terminal = 'terminal',      // Recipe produces items that no other recipe consumes
     Original = 'original',      // Recipe requires items that no other recipes produce
     Goal = 'goal'               // Space Elevator Goal Part
-
 };
 
 export default KnownTags;
+
+export function getTagValues() {
+    return Object.values(KnownTags);
+}

@@ -6,7 +6,6 @@ export default function manufacturer() : SimpleMaker[] {
     const b = makerBuildings.manufacturer;
 
     return [
-
         i4o1(b, 'Adaptive Control Unit',                   'Automated Wiring',       7.5,    'Circuit Board',               5      ,'Heavy Modular Frame',          1,      'Computer',                 1,      'Adaptive Control Unit',    1, [KnownTags.Goal]),
         i4o1(b, 'Alternate: Automated Miner',              'Motor',                  1,      'Steel Pipe',                  4      ,'Iron Rod',                     4,      'Iron Plate',               2,      'Portable Miner',    1),
         i3o1(b, 'Alternate: Automated Speed Wiring',       'Stator',                 3.75,   'Wire',                        75     ,'High-Speed Connector',         1.875,  'Automated Wiring',         7.5, [KnownTags.Goal]),
@@ -18,7 +17,7 @@ export default function manufacturer() : SimpleMaker[] {
         i4o1(b, 'Alternate: Heavy Flexible Frame',         'Modular Frame',          18.75,  'Encased Industrial Beam',     11.25  ,'Rubber',                       75,     'Screw',                    390,    'Heavy Modular Frame',    3.8),
         i4o1(b, 'Alternate: Infused Uranium Cell',         'Uranium',                25,     'Silica',                      15     ,'Sulfur',                       25,     'Quickwire',                75,     'Encased Uranium Cell',    20),
         i3o1(b, 'Alternate: Insulated Crystal Oscillator', 'Quartz Crystal',         18.75,  'Rubber',                      13.125 ,'AI Limiter',                   1.875,  'Crystal Oscillator',       1.9),
-        i3o1(b, 'Alternate: Plastic Smart Plating  ',      'Reinforced Iron Plate',  2.5,    'Rotor',                       2.5    ,'Plastic',                      7.5,    'Smart Plating',            5),
+        i3o1(b, 'Alternate: Plastic Smart Plating  ',      'Reinforced Iron Plate',  2.5,    'Rotor',                       2.5    ,'Plastic',                      7.5,    'Smart Plating',            5, [KnownTags.Goal]),
         i3o1(b, 'Alternate: Radio Connection Unit',        'Heat Sink',              15,     'High-Speed Connector',        7.5    ,'Quartz Crystal',               45,     'Radio Control Unit',       3.8),
         i3o1(b, 'Alternate: Rigour Motor',                 'Rotor  ',                3.75,   'Stator',                      3.75   ,'Crystal Oscillator',           1.25,   'Motor',                    7.5),
         i3o1(b, 'Alternate: Seismic Nobelisk',             'Black Powder ',          12,     'Steel Pipe',                  12     ,'Crystal Oscillator',           1.5,    'Nobelisk',                 6),
@@ -34,7 +33,7 @@ export default function manufacturer() : SimpleMaker[] {
         i4o1(b, 'Heavy Modular Frame',                     'Modular Frame',          10,     'Steel Pipe',                  30     ,'Encased Industrial Beam',      10,     'Screw',                    200,    'Heavy Modular Frame',    2),
         i3o1(b, 'High-Speed Connector',                    'Quickwire',              210,    'Cable',                       37.5   ,'Circuit Board',                3.75,   'High-Speed Connector',     3.8),
         i3o1(b, 'Iodine Infused Filter',                   'Gas Filter',             3.75,   'Quickwire',                   30     ,'Aluminum Casing',              3.75,   'Iodine Infused Filter',    3.8),
-        i3o1(b, 'Magnetic Field Generator',                'Versatile Framework',    2.5,    'Electromagnetic Control Rod', 1      ,'Battery',                      5,      'Magnetic Field Generator', 1),
+        i3o1(b, 'Magnetic Field Generator',                'Versatile Framework',    2.5,    'Electromagnetic Control Rod', 1      ,'Battery',                      5,      'Magnetic Field Generator', 1, [KnownTags.Goal]),
         i3o1(b, 'Modular Engine',                          'Motor',                  2,      'Rubber',                      15     ,'Smart Plating',                2,      'Modular Engine',           1, [KnownTags.Goal]),
         i4o1(b, 'Plutonium Fuel Rod',                      'Encased Plutonium Cell', 7.5,    'Steel Beam',                  4.5    ,'Electromagnetic Control Rod ', 1.5,    'Heat Sink',                2.5,    'Plutonium Fuel Rod',    0.3),
         i3o1(b, 'Radio Control Unit',                      'Aluminum Casing',        40,     'Crystal Oscillator',          1.25   ,'Computer',                     1.25,   'Radio Control Unit',       2.5),

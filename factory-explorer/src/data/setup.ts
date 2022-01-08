@@ -6,6 +6,26 @@ import loader from './loader';
 
 type ItemRecords = {[key: string]: boolean}
 
+function cleanData(data: SimpleMaker[]) : SimpleMaker[] {
+    return data.map(simpleMaker => {
+        const cleaned :SimpleMaker = simpleMaker;
+
+        cleaned.recipeName = cleaned.recipeName.trim();
+
+        cleaned.inputs = cleaned.inputs.map(input => ({
+            item: input.item.trim(),
+            rate: input.rate,
+        }));
+
+        cleaned.outputs = cleaned.outputs.map(output => ({
+            item: output.item.trim(),
+            rate: output.rate,
+        }));
+
+        return cleaned;
+    });
+}
+
 function hasRecord(records: ItemRecords, ports: SimplePort[]) {
     for(const port of ports) {
         if(records[port.item]) {
@@ -17,9 +37,6 @@ function hasRecord(records: ItemRecords, ports: SimplePort[]) {
 }
 
 function tagTerminals(makers : SimpleMaker[]) {
-
-
-
     const foundOutputs: ItemRecords = {};
     const foundInputs: ItemRecords = {};
 
@@ -36,10 +53,6 @@ function tagTerminals(makers : SimpleMaker[]) {
         .filter(key => !foundInputs[key])
         .reduce((sum: ItemRecords, current) => { sum[current] = true; return sum;}, {});
 
-
-
-
-
     makers.forEach(maker => {
         if(hasRecord(inputTerminals, maker.inputs)) {
             maker.tags.push(KnownTags.Original);
@@ -51,21 +64,10 @@ function tagTerminals(makers : SimpleMaker[]) {
             maker.tags.push(KnownTags.Terminal);
         }
     });
-
-
-    console.log('Output Terminals');
-    console.log(outputTerminals);
-    console.log('Input Terminals');
-    console.log(inputTerminals);
-
 }
 
 
-const result: SimpleMaker[] = [
-    ...loader(),
-
-
-]
+const result: SimpleMaker[] = cleanData(loader());
 
 tagTerminals(result);
 

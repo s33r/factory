@@ -1,6 +1,5 @@
 import { SimpleMaker, makerBuildings, forge } from '../simpleTypes';
-import { i4o1, i3o1, i2o1, i2o2 } from '../builders';
-import KnownTags from '../../model/KnownTags';
+import { i4o1, i3o1, i2o1 } from '../builders';
 
 export default function blender() : SimpleMaker[] {
     const b = makerBuildings.blender;

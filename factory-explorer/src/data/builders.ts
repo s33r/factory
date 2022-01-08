@@ -1,5 +1,5 @@
 
-import { SimpleMaker, Building, makerBuildings, forge } from './simpleTypes';
+import { SimpleMaker, Building, forge } from './simpleTypes';
 import ExtractorLevel, { getBuilding } from './ExtractorLevel';
 import NodeQuality, { getTag } from './NodeQuality';
 import KnownTags from '../model/KnownTags';

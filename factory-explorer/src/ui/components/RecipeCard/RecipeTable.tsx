@@ -18,22 +18,27 @@ function RecipeCard(props: RecipeCardProps) {
       <Card.Title>{props.recipe.recipeName}</Card.Title>
         <Table>
           <caption className="caption-top">Inputs</caption>
+          <tbody>
           {props.recipe.inputs.map((entry, index) => (
             <tr key={index} >
               <td>{entry.rate}</td>
               <th>{entry.item}</th>
             </tr>
           ))}
+          </tbody>
         </Table>
 
         <Table>
+
           <caption className="caption-top">Outputs</caption>
+          <tbody>
           {props.recipe.outputs.map((entry, index) => (
             <tr key={index} >
               <td>{entry.rate}</td>
               <th>{entry.item}</th>
             </tr>
           ))}
+          </tbody>
         </Table>
       </Card.Body>
 

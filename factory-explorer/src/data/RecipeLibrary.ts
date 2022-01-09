@@ -45,7 +45,7 @@ class LookupTable<T> {
             throw new Error(`Cannot add duplicate item: ${key}`);
         }
 
-        this._entries[key].push(Object.assign({}, item));
+        this._entries[key].push(item);
     }
 
     constructor(allowDuplicates: boolean = true) {
@@ -106,7 +106,7 @@ export default class RecipeLibrary {
             throw new Error(`Recipe: ${name} does not exist!`);
         }
 
-        return this._recipesByName.first(name);
+        return Object.assign({}, this._recipesByName.first(name));
     }
 
     public filterByName(name: string, caseSensitive: boolean = false) : SimpleMaker[] {

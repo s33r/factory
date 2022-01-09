@@ -30,11 +30,54 @@ type FactoryViewProps = {
 }
 
 type FactoryViewState = {
+  filterText: string,
   recipeList: SimpleMaker[],
-  filterType: 'name',
+  filterType: string,
+  filterTypeText: string,
 }
 
+const filterTypeKeys : {[key: string]: string} = {
+  name : 'Recipe Name',
+  output : 'Output',
+  input : 'Input',
+  tag : 'Tag',
+  building : 'Building',
+}
 
+function updateState(filterText: string, filterType: string) : FactoryViewState {
+  if(!filterText) {
+    return {
+      filterText,
+      filterType,
+      recipeList: recipeLibrary.getAll(),
+      filterTypeText: filterTypeKeys[filterType],
+    };
+  }
+
+  let recipeList;
+
+  if(filterType === 'name') {
+      recipeList = recipeLibrary.filterByName(filterText);
+  } else if(filterType === 'input') {
+      recipeList = recipeLibrary.filterByInput(filterText);
+  } else if(filterType === 'output') {
+      recipeList = recipeLibrary.filterByOutput(filterText);
+  } else if(filterType === 'tag') {
+      recipeList = recipeLibrary.filterByTag(filterText);
+  } else if(filterType === 'building') {
+      recipeList = recipeLibrary.filterByBuilding(filterText);
+  } else {
+      recipeList = recipeLibrary.filterByName(filterText);
+  }
+
+  return {
+    filterText,
+    filterType,
+    recipeList,
+    filterTypeText: filterTypeKeys[filterType],
+  };
+
+}
 
 export default class FactoryView extends React.Component<FactoryViewProps, FactoryViewState> {
 
@@ -44,22 +87,25 @@ export default class FactoryView extends React.Component<FactoryViewProps, Facto
     super(props);
 
     this.state = {
-      recipeList: recipeLibrary.getAll()
+      filterText: '',
+      recipeList: recipeLibrary.getAll(),
+      filterType: 'name',
+      filterTypeText: filterTypeKeys.name,
     }
   }
 
   filterList(event: any) {
-    const filter = event.target.value;
+    const newState = updateState(event.target.value, this.state.filterType);
 
-    if(!filter) {
-      this.setState({
-        recipeList: recipeLibrary.getAll()
-      });
-    } else {
-      this.setState({
-        recipeList: recipeLibrary.filterByName(filter)
-      });
-    }
+    this.setState(newState);
+  }
+
+  changeFilterType(filterType: string | null) {
+    const filterTypeActual = filterType || 'name';
+
+    const newState = updateState(this.state.filterText, filterTypeActual);
+
+    this.setState(newState);
   }
 
   render() {
@@ -83,21 +129,25 @@ export default class FactoryView extends React.Component<FactoryViewProps, Facto
           <Tab eventKey="all-view" title="All Recipes">
             <Container fluid>
               <InputGroup className="mb-3">
-              <DropdownButton
-                variant="outline-secondary"
-                title="Filter Type"
-                id="filter-type-selector">
+                <InputGroup.Text id="basic-addon1">Filter By</InputGroup.Text>
+                <DropdownButton
+                  variant="outline-secondary"
+                  title={this.state.filterTypeText}
+                  onSelect={this.changeFilterType.bind(this)}
+                  id="filter-type-selector">
 
-                <Dropdown.Item href="#">Recipe Name</Dropdown.Item>
-                <Dropdown.Item href="#">Outputs</Dropdown.Item>
-                <Dropdown.Item href="#">Inputs</Dropdown.Item>
-              </DropdownButton>
-              <FormControl
-                placeholder="Recipe Name"
-                aria-label="Filter Text"
-                aria-describedby="recipe-filter"
-                onChange={this.filterList.bind(this)}
-                />
+                  <Dropdown.Item eventKey="name">Recipe Name</Dropdown.Item>
+                  <Dropdown.Item eventKey="output">Output</Dropdown.Item>
+                  <Dropdown.Item eventKey="input">Input</Dropdown.Item>
+                  <Dropdown.Item eventKey="tag">Tag</Dropdown.Item>
+                  <Dropdown.Item eventKey="building">Building</Dropdown.Item>
+                </DropdownButton>
+                <FormControl
+                  placeholder="Recipe Name"
+                  aria-label="Filter Text"
+                  aria-describedby="recipe-filter"
+                  onChange={this.filterList.bind(this)}
+                  />
               </InputGroup>
 
               <Container fluid>

@@ -1,5 +1,6 @@
+import Decimal from 'decimal.js';
 import IForge from './IForge';
-import  SupplyTableEntry  from './SupplyTableEntry';
+import SupplyTableEntry  from './SupplyTableEntry';
 
 type SupplyTableMap = {
     [key: string]: SupplyTableEntry
@@ -16,8 +17,8 @@ export default class SupplyTable {
         if(!this._map[itemName]) {
             this._map[itemName] = new SupplyTableEntry(itemName, supply, demand);
         } else {
-            this._map[itemName].supply += supply;
-            this._map[itemName].demand += demand;
+            this._map[itemName].supply = this._map[itemName].supply.add(new Decimal(supply));
+            this._map[itemName].demand = this._map[itemName].demand.add(new Decimal(demand));
         }
 
         return this;

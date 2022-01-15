@@ -10,6 +10,7 @@ import refinery from './refinery';
 import blender from './blender';
 import accelerator from './accelerator';
 import power from './power';
+import packager from './packager';
 
 export default function loader() : SimpleMaker[] {
      return [
@@ -20,6 +21,7 @@ export default function loader() : SimpleMaker[] {
          ...assembler(),
          ...manufacturer(),
          ...refinery(),
+         ...packager(),
          ...blender(),
          ...accelerator(),
          ...power(),

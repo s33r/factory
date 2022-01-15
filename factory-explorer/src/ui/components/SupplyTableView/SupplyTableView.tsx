@@ -1,4 +1,5 @@
 import React from 'react';
+import Decimal from 'decimal.js';
 import './SupplyTableView.css';
 
 import Table from 'react-bootstrap/Table';
@@ -42,8 +43,8 @@ function SupplyTableView(props: SupplyTableProps) {
           <tr key={index} className={getRowClass(entry.delta)}>
             <td>{entry.delta}</td>
             <td>{entry.itemName}</td>
-            <td>{entry.supply}</td>
-            <td>{entry.demand}</td>
+            <td>{entry.supply.toNumber()}</td>
+            <td>{entry.demand.toNumber()}</td>
           </tr>
         ))}
         </tbody>

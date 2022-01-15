@@ -31,6 +31,7 @@ export const makerBuildings : {[key: string]: Building} = {
     foundry:          { buildingName: 'Foundry',              basePower: -16},
     smelter:          { buildingName: 'Smelter',              basePower: -4},
     refinery:         { buildingName: 'Refinery',             basePower: -30},
+    packager:         { buildingName: 'Packager',             basePower: -10},
     blender:          { buildingName: 'Blender',              basePower: -75},
     accelerator:      { buildingName: 'Particle Accelerator', basePower: -1500},
     generatorCoal:    { buildingName: 'Coal Generator',       basePower: 75},

@@ -76,7 +76,6 @@ function updateState(filterText: string, filterType: string) : FactoryViewState 
     recipeList,
     filterTypeText: filterTypeKeys[filterType],
   };
-
 }
 
 export default class FactoryView extends React.Component<FactoryViewProps, FactoryViewState> {

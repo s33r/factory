@@ -1,3 +1,4 @@
+import Decimal from 'decimal.js';
 import { SimplePort } from '../data/simpleTypes';
 import IForge from './IForge';
 
@@ -7,7 +8,11 @@ export default class Port {
     readonly parent: IForge;
 
     get rate() : number {
-        return this.parent.instances * this.baseRate * this.parent.efficiency;
+        const instances = new Decimal(this.parent.instances);
+        const baseRate = new Decimal(this.baseRate);
+        const efficiency = new Decimal(this.parent.efficiency)
+
+        return instances.mul(baseRate).mul(efficiency).toNumber();
     }
 
     constructor(parent: IForge, itemName: string, baseRate: number) {

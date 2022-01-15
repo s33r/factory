@@ -45,6 +45,7 @@ export default function assembler() : SimpleMaker[] {
         i2o1(b, 'Circuit Board',                             'Copper Sheet',                15,    'Plastic',                  30,    'Circuit Board',               7.5),
         i2o1(b, 'Electromagnetic Control Rod',               'Stator',                      3,     'AI Limiter',               4,     'Electromagnetic Control Rod', 4),
         i2o1(b, 'Encased Industrial Beam',                   'Steel Beam',                  24,    'Concrete',                 30,    'Encased Industrial Beam',     6),
+        i2o1(b, 'Encased Plutonium Cell',                    'Plutonium Pellet',            10,    'Concrete',                 20,    'Encased Plutonium Cell',      6),
         i2o1(b, 'Fabric',                                    'Mycelia',                     15,    'Biomass',                  75,    'Fabric',                      15,  [KnownTags.Finite]),
         i2o1(b, 'Fancy Fireworks',                           'FICSMAS Tree Branch',         10,   'FICSMAS Bow',               7.5,   'Fancy Fireworks',             2.5, [KnownTags.Ficsmas]),
         i2o1(b, 'FICSMAS Decoration',                        'FICSMAS Tree Branch',         15,    'FICSMAS Ornament Bundle',  6,     'FICSMAS Decoration',          2,   [KnownTags.Ficsmas]),
